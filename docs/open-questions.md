@@ -17,4 +17,4 @@ Resolve each by an ADR plus tests before marking the behavior normative.
 
 11. **Partly resolved (ADR 0005):** host-managed digital action mapping, focus and pressed-state cleanup approved; analog input, gestures, pointer coordinates, multiplayer input and default layouts remain open.
 
-12. **Partly resolved (ADR 0008):** `init(covil)`, `covil.has`, `covil.request` and capability-specific facades approved; SDK implementation, method schemas, wire request/reply, revocation events and conformance tests pending.
+12. **Partly resolved (ADR 0008):** `init(covil)`, `covil.has`, `covil.request` and capability-specific facades approved; minimal SDK core and initial tests added; full SDK, method schemas, wire request/reply, revocation events and browser-host conformance pending.
