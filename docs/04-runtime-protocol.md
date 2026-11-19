@@ -1,6 +1,6 @@
 # Runtime communication protocol (experimental 0.1)
 
-**Status:** proposed message envelope; subject to interoperability testing. Transport for browser hosts: `postMessage` via a dedicated `MessageChannel` port transferred only after the isolated frame is initialized.
+**Status:** minimal lifecycle and message types approved by [ADR 0004](../adr/0004-runtime-lifecycle-protocol.md); wire-level limits, timeouts and conformance tests remain experimental. Transport for browser hosts: `postMessage` via a dedicated `MessageChannel` port transferred only after the isolated frame is initialized.
 
 ## Envelope
 
@@ -17,8 +17,12 @@ Every message has `covil`, `sessionId`, `id`, `type` and `payload`. Session iden
 3. Game sends `game.ready` or `game.error`.
 4. Host sends `host.start`.
 5. Host may send `host.pause`, `host.resume`, `host.display`, `host.input`.
-6. Host sends `host.stop`; game releases resources and sends `game.stopped`.
+6. Host sends `host.stop` as a cooperative request; game may release resources and send `game.stopped`. The host can invalidate the session and remove the iframe without waiting for the game.
 
 Unrecognized message types are ignored or rejected according to the negotiated version; they must never trigger privileged behavior. The host may terminate unresponsive games. Define timeouts and error codes before claiming conformance.
 
 **Security:** `postMessage` alone is not a sandbox. A production host requires an opaque isolated origin, restrictive CSP, permission policy and controlled networking. Do not transfer privileged handles or secrets.
+
+## Host authority
+
+The host owns lifecycle transitions, permissions and termination. A VLG cannot authorize itself, send privileged host commands or veto termination. Paused games must stop gameplay simulation. Messages are validated for direction, session, state, schema and size; late messages are discarded. See [ADR 0004](../adr/0004-runtime-lifecycle-protocol.md).
