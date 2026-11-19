@@ -20,4 +20,6 @@ The draft [JSON Schema](../schemas/manifest.schema.json) checks the mandatory mi
 
 `storage` is `none` or `local` in this subset; `network` is `none` or `required`. A required capability that the host cannot grant causes a clear incompatibility error. An entrypoint must be a local relative HTML file. The host may negotiate optional features beyond this baseline, but must not silently grant privileged services.
 
-Future decisions: explicit optional vs required capabilities, origin allowlists, input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
+Input action declaration is approved by [ADR 0005](../adr/0005-input-controls.md): `input.actions` lists logical action identifiers, independent of physical controls. The host maps and delivers them through `host.input`.
+
+Future decisions: explicit optional vs required capabilities, origin allowlists, advanced input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
