@@ -13,7 +13,7 @@ export function validateBytes(bytes){
  if(!["emulator","mobile","adaptive"].includes(manifest.display?.mode)||!["portrait","landscape","any"].includes(manifest.display?.orientation)||! /^[1-9]\d*:[1-9]\d*$/.test(manifest.display?.aspectRatio))throw Error("Invalid display");
  if(!Array.isArray(manifest.input?.actions)||new Set(manifest.input.actions).size!==manifest.input.actions.length||manifest.input.actions.some(x=>typeof x!=="string"||! /^[a-z][a-z0-9_-]*$/.test(x)))throw Error("Invalid input");
  const caps=manifest.capabilities;
- const capabilityId=/^[a-z][a-z0-9_-]*(?:\\.[a-z][a-z0-9_-]*)+$/;
+ const capabilityId=/^[a-z][a-z0-9_-]*(?:\.[a-z][a-z0-9_-]*)+$/;
  if(!caps||typeof caps!=="object"||Array.isArray(caps)||
     Object.keys(caps).length!==2||!Object.hasOwn(caps,"required")||!Object.hasOwn(caps,"optional")||
     !Array.isArray(caps.required)||!Array.isArray(caps.optional))throw Error("Invalid capabilities");
