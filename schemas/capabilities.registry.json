@@ -1,0 +1,168 @@
+{
+  "registryVersion": "0.1",
+  "status": "experimental",
+  "description": "Canonical COVIL capability identifiers. Presence in registry does not imply host support or grant.",
+  "capabilities": [
+    {
+      "id": "input.buttons",
+      "category": "input",
+      "tier": "core",
+      "access": "host",
+      "description": "Host delivers named digital action press/release events via host.input; physical buttons are not required."
+    },
+    {
+      "id": "input.touch",
+      "category": "input",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can supply touch contacts/gestures to game through an explicitly negotiated interface; not equivalent to input.buttons."
+    },
+    {
+      "id": "input.pointer",
+      "category": "input",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can supply pointer position and button events in game-local coordinates."
+    },
+    {
+      "id": "input.keyboard",
+      "category": "input",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can supply keyboard events or key-level information; not required for input.buttons."
+    },
+    {
+      "id": "input.gamepad",
+      "category": "input",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can expose gamepad-specific buttons or axes; a gamepad is not necessary for input.buttons."
+    },
+    {
+      "id": "input.motion",
+      "category": "input",
+      "tier": "extension",
+      "access": "permission",
+      "description": "Host can deliver motion/orientation sensor samples after platform and permission checks."
+    },
+    {
+      "id": "output.graphics",
+      "category": "output",
+      "tier": "core",
+      "access": "host",
+      "description": "Host provides an isolated drawable viewport and reports its dimensions; does not guarantee WebGL, FPS or a particular resolution."
+    },
+    {
+      "id": "output.audio",
+      "category": "output",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host permits audible playback under user gesture, mute and volume policy; not a microphone capability."
+    },
+    {
+      "id": "output.haptics",
+      "category": "output",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can perform bounded vibration/haptic requests; no guarantee of waveform precision."
+    },
+    {
+      "id": "output.fullscreen",
+      "category": "output",
+      "tier": "extension",
+      "access": "host",
+      "description": "Host can request an expanded/fullscreen presentation when supported and permitted; game cannot control host chrome directly."
+    },
+    {
+      "id": "output.orientation",
+      "category": "output",
+      "tier": "extension",
+      "access": "host",
+      "description": "Host can attempt requested display orientation when supported; not guaranteed to lock orientation."
+    },
+    {
+      "id": "sensors.camera",
+      "category": "sensors",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can mediate camera data after explicit user permission; never implies direct iframe camera access."
+    },
+    {
+      "id": "sensors.microphone",
+      "category": "sensors",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can mediate microphone data after explicit user permission; never implies direct iframe microphone access."
+    },
+    {
+      "id": "sensors.location",
+      "category": "sensors",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can mediate location information with explicit permission and scope."
+    },
+    {
+      "id": "storage.save",
+      "category": "storage",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can persist and retrieve per-game isolated save data; no access to another game's saves or host storage."
+    },
+    {
+      "id": "storage.file-import",
+      "category": "storage",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can mediate user-selected file import; no arbitrary filesystem access."
+    },
+    {
+      "id": "network.multiplayer",
+      "category": "network",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can provide an approved multiplayer transport/service; does not imply unrestricted fetch/WebSocket access."
+    },
+    {
+      "id": "platform.identity",
+      "category": "platform",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can expose a scoped pseudonymous player identity; never raw host tokens or credentials."
+    },
+    {
+      "id": "platform.achievements",
+      "category": "platform",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can record/retrieve achievements within its own service contract."
+    },
+    {
+      "id": "platform.leaderboard",
+      "category": "platform",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host can submit/read scores within its own service contract."
+    },
+    {
+      "id": "platform.notifications",
+      "category": "platform",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host can mediate notifications subject to platform/user permission."
+    },
+    {
+      "id": "platform.payments",
+      "category": "platform",
+      "tier": "extension",
+      "access": "sensitive",
+      "description": "Host may offer a controlled purchase flow; game never receives payment credentials."
+    },
+    {
+      "id": "platform.share",
+      "category": "platform",
+      "tier": "extension",
+      "access": "mediated",
+      "description": "Host may invoke a user-approved share flow; not automatic publishing."
+    }
+  ]
+}
