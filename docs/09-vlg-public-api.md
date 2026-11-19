@@ -59,3 +59,7 @@ Os identificadores seguem o [registro de capacidades](08-capability-registry.md)
 ## Próximas definições
 
 Esquemas de mensagens de chamada/resposta, erros, limites, eventos de revogação, quotas e testes de integração do SDK/host. O protótipo `hello-vlg` foi migrado para o SDK mínimo; o SDK ainda usa o protocolo diretamente internamente. A verificação de capacidades antes da execução é responsabilidade do host.
+
+## Ownership: game versus SDK versus host
+
+The game implements `init(covil)` and callbacks, **not** the SDK or its protocol. The SDK calls `init` after `host.init` and emits `game.ready`; the host maps physical input and controls lifecycle. Game-authored `sdk.js`, direct `window.parent.postMessage({type:'game.ready'}, '*')` and starting simulation before `host.start` are not conformant substitutes. Read the [developer responsibility guide](12-responsibilities-and-developer-guide.md) before writing a VLG.
