@@ -16,6 +16,7 @@ export interface Envelope<T = unknown> {
 export interface Viewport { width: number; height: number; dpr: number; orientation: Orientation; }
 export interface InputEvent { action: string; pressed: boolean; }
 export interface InitPayload { protocol: "0.1"; capabilities: string[]; viewport: Viewport; actions: string[]; }
+export interface CapabilitiesDeclaration { required: string[]; optional: string[]; }
 export interface Manifest {
   schemaVersion: "0.1";
   id: string;
@@ -25,5 +26,5 @@ export interface Manifest {
   runtime: "web";
   display: { mode: DisplayMode; orientation: Orientation; aspectRatio: string };
   input: { actions: string[] };
-  capabilities: { storage: "none" | "local"; network: "none" | "required" };
+  capabilities: CapabilitiesDeclaration;
 }
