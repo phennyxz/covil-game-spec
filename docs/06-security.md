@@ -16,4 +16,4 @@ Untrusted archives may include path traversal, duplicate names, ZIP bombs, malfo
 
 **Prototype caveat:** the CLI validator checks structure and hashes only. It does not provide a sandbox, Ed25519 verification, key revocation, malware scanning or safe publishing. Do not run arbitrary imported games as trusted content.
 
-Signature canonicalization: evaluate RFC 8785 JCS, Ed25519, key IDs, expiry/revocation, update identity and key rollover in a dedicated ADR.
+**Approved signature architecture:** see [ADR 0002](../adr/0002-signature-design.md). Sign the domain-separated exact bytes of `integrity.json` with Ed25519; SHA-256 inventory covers every payload file including the manifest. Unsigned local packages require explicit developer mode; Jogai catalog packages require valid signatures from recognized developer keys. Key revocation and rollover details remain open. The current prototype does not implement Ed25519.
