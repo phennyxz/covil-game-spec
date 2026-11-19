@@ -36,7 +36,7 @@ node tools/validate-vlg.mjs dist/hello-vlg.vlg
 node --test tests/conformance/*.test.mjs
 ```
 
-The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**; unsigned packages are accepted for local development only. Do not publish untrusted games from this prototype without a secure isolated host.
+The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures. Do not publish untrusted games from this prototype without a secure isolated host.
 
 ## License
 
