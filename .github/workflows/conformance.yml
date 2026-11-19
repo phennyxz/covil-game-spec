@@ -1,0 +1,20 @@
+name: COVIL conformance
+on:
+  push:
+  pull_request:
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run conformance tests
+        run: node --test tests/conformance/*.test.mjs
+      - name: Build generic hello VLG
+        run: node tools/covil-build.mjs examples/hello-vlg dist/hello-vlg.vlg
+      - name: Validate built VLG
+        run: node tools/validate-vlg.mjs dist/hello-vlg.vlg
