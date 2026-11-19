@@ -14,3 +14,5 @@ These items are deliberately **not** final requirements:
 10. Governance, trademark, licensing and change approval policy.
 
 Resolve each by an ADR plus tests before marking the behavior normative.
+
+11. **Partly resolved (ADR 0005):** host-managed digital action mapping, focus and pressed-state cleanup approved; analog input, gestures, pointer coordinates, multiplayer input and default layouts remain open.
