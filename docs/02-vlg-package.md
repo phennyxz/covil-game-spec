@@ -29,3 +29,7 @@ The example above is illustrative, not a complete package inventory.
 ## Signing boundary
 
 The integrity inventory cannot include its own hash. The signature file cannot cover itself. Signature scope and development/catalog trust policy are approved in [ADR 0002](../adr/0002-signature-design.md). Key ID encoding, rotation and revocation still require normative detail. The current tools **do not** verify signatures.
+
+## Distribution envelope (ADR 0009)
+
+A distributor's second signature is **not** inserted into the original VLG ZIP. The original developer-signed `.vlg` remains unchanged; a separate `distribution.json` and `distribution.sig` envelope binds authorization to the exact package bytes via SHA-256. This avoids invalidating the ADR 0002 inventory-completeness rule. Distribution authorization and technical homologation are separate claims. The envelope schema and signature verifier are not yet implemented. See [ADR 0009](../adr/0009-distribution-trust-chain.md).
