@@ -31,3 +31,11 @@ Um iframe sandbox com `allow-scripts` e **sem** `allow-same-origin` é apenas pa
 ## Pendências não bloqueantes do contrato conceitual, mas bloqueantes de produção
 
 Limites exatos de mensagens e timeouts, protocolo de RPC, revogação, verificação Ed25519, chaves confiáveis, armazenamento offline de pacotes, testes adversariais de navegador, segundo host e compatibilidade de versões.
+
+## Estado de implementação em 2026-11-19
+
+- `sdk/covil-core.mjs`: núcleo experimental de `init(covil)`, `has`, `controls.on` e eventos de ciclo de vida, com mensagens de sessão.
+- `host/capability-preflight.mjs`: função pura de verificação; **não é um host**, nem valida pacotes ou aplica permissões.
+- `examples/hello-vlg`: migrado para o SDK; o empacotador inclui `covil-core.mjs` no inventário.
+- `tests/conformance/runtime.test.mjs`: testes de pré-verificação e canal criados, **não executados**.
+- Não existe ainda host de navegador isolado, testes de navegador real ou segundo host independente. As caixas pendentes do relatório de auditoria permanecem abertas.
