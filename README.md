@@ -22,6 +22,7 @@ COVIL is an open, framework-independent specification for packaging and running 
 - [Security](docs/06-security.md)
 - [Versioning and conformance](docs/07-versioning.md)
 - [Capability registry](docs/08-capability-registry.md) and [machine-readable IDs](schemas/capabilities.registry.json)
+- [VLG public API](docs/09-vlg-public-api.md) and [ADR 0008](adr/0008-vlg-public-api.md)
 - [Open questions](docs/open-questions.md)
 - [Minimal game](examples/hello-vlg/)
 - [Validator](tools/validate-vlg.mjs) and [tests](tests/conformance/)
@@ -47,6 +48,6 @@ Runtime lifecycle and host authority are specified in [ADR 0004](adr/0004-runtim
 
 Input device abstraction and host-managed control mapping are specified in [ADR 0005](adr/0005-input-controls.md).
 
-Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is pending.
+Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is complete, but runtime enforcement is pending.
 
-The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator, types, tests and example now use the approved lists; runtime capability discovery, permission enforcement and the canonical registry remain pending.
+The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator, types, tests and example now use the approved lists; runtime capability discovery and permission enforcement remain pending; the canonical registry is published.
