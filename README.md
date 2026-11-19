@@ -31,15 +31,19 @@ COVIL is an open, framework-independent specification for packaging and running 
 - [Validator](tools/validate-vlg.mjs) and [tests](tests/conformance/)
 - [Architecture decisions](adr/), including [signed inventory](adr/0002-signature-design.md) and [host-owned iframe isolation](adr/0003-vlg-execution-isolation.md)
 
-## Quick start
+## Quick start — build your own VLG
 
-Requires Node.js 20+; no npm dependencies.
+Requires Node.js 20+; no npm dependencies. **Read [AGENTS.md](AGENTS.md) before generating code with an AI assistant** and the [responsibility guide](docs/12-responsibilities-and-developer-guide.md). Do not infer the runtime API from this README alone.
+
+Create a source directory with `manifest.json`, an HTML entrypoint, JavaScript and optional nested assets. Copy the [hello-vlg game bootstrap](examples/hello-vlg/game.js) and import `./covil-core.mjs`; the builder supplies the official experimental SDK automatically.
 
 ```sh
-node tools/build-example.mjs
+node tools/covil-build.mjs examples/hello-vlg dist/hello-vlg.vlg
 node tools/validate-vlg.mjs dist/hello-vlg.vlg
 node --test tests/conformance/*.test.mjs
 ```
+
+To package another game, replace the source directory and output name: `node tools/covil-build.mjs my-game dist/my-game.vlg`. The builder discovers nested assets, generates `integrity.json`, rejects reserved metadata and validates the output. It creates **unsigned development packages only**; it does not run games, verify signatures or implement a secure host. The older `tools/build-example.mjs` remains as a fixed-file example and is not the recommended builder.
 
 The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures **and** distributor authorization per ADR 0009; neither is implemented yet. Do not publish untrusted games from this prototype without a secure isolated host.
 
