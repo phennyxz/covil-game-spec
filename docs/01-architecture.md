@@ -18,11 +18,11 @@ The reference host and any Jogai adapter are separate implementations; this repo
 
 ## Proposed implementation milestones
 
-M1: minimal VLG ZIP, schema, integrity, sandboxed host, handshake, pause/resume/stop, two-host interoperability test.
+M1: minimal VLG ZIP, schema, integrity, sandboxed host, handshake, pause/resume/stop, two-host interoperability test. **Not complete:** a pure capability preflight and SDK handshake prototype exist, but the isolated browser host and two-host test do not.
 
 M2: canonical signatures, key trust policy, capability grants, offline package cache.
 
-M3: optional SDK and extensions. Do not implement M2/M3 claims as if they already exist.
+M3: capability-specific SDK and extensions. A **minimal experimental SDK core** now exists, but privileged capability APIs, hardened host isolation and interoperability certification remain pending.
 
 ## Approved isolation boundary
 
