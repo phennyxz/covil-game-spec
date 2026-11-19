@@ -56,3 +56,7 @@
 ## Fora do escopo atual
 
 A semântica fina de gestos, eixos analógicos, formatos de mídia, APIs de armazenamento, eventos de revogação, quotas e mensagens de consulta/concessão será especificada por contratos posteriores. Este registro **não** certifica implementação de nenhuma dessas APIs em Jogai/COVIL.
+
+## API de uso
+
+O SDK VLG expõe interfaces por capacidade (por exemplo `covil.controls.on`, `covil.storage.load`, `covil.haptics.vibrate`) e os métodos `covil.has` / `covil.request`, conforme [ADR 0008](../adr/0008-vlg-public-api.md). A lista acima define os identificadores, não certifica implementação de métodos.
