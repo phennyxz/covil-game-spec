@@ -22,9 +22,9 @@ The ADR 0007 format uses namespaced capability identifiers in `required` and `op
 
 Input action declaration is approved by [ADR 0005](../adr/0005-input-controls.md): `input.actions` lists logical action identifiers, independent of physical controls. The host maps and delivers them through `host.input`.
 
-[ADR 0006](../adr/0006-capability-negotiation.md) approves required/optional capability negotiation and the rule that missing required grants prevent launch. The 0.1 schema, prototype validator and example now use the new declaration shape. The legacy `storage`/`network` representation is rejected. Capability registry and runtime negotiation remain pending.
+[ADR 0006](../adr/0006-capability-negotiation.md) approves required/optional capability negotiation and the rule that missing required grants prevent launch. The 0.1 schema, prototype validator and example now use the new declaration shape. The legacy `storage`/`network` representation is rejected. Capability registry is published; full runtime permission negotiation remains pending.
 
-Future decisions: canonical capability registry, origin allowlists, advanced input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
+Future decisions: capability-specific method contracts, origin allowlists, advanced input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
 
 ## Approved capability contract (ADR 0007)
 
