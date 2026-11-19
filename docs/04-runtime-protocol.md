@@ -26,3 +26,7 @@ Unrecognized message types are ignored or rejected according to the negotiated v
 ## Host authority
 
 The host owns lifecycle transitions, permissions and termination. A VLG cannot authorize itself, send privileged host commands or veto termination. Paused games must stop gameplay simulation. Messages are validated for direction, session, state, schema and size; late messages are discarded. See [ADR 0004](../adr/0004-runtime-lifecycle-protocol.md).
+
+## Capability negotiation (ADR 0006)
+
+The VLG may query host-supported capabilities and session grants; the host remains authoritative. Missing required grants prevent startup, while missing optional grants allow graceful degradation. The exact query/result/revocation message types are **not yet standardized**; see [ADR 0006](../adr/0006-capability-negotiation.md).
