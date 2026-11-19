@@ -47,3 +47,5 @@ Runtime lifecycle and host authority are specified in [ADR 0004](adr/0004-runtim
 Input device abstraction and host-managed control mapping are specified in [ADR 0005](adr/0005-input-controls.md).
 
 Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is pending.
+
+The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator and example migration remain pending; the existing prototype still accepts only the legacy fields.
