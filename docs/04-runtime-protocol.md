@@ -30,3 +30,7 @@ The host owns lifecycle transitions, permissions and termination. A VLG cannot a
 ## Capability negotiation (ADR 0006)
 
 The VLG may query host-supported capabilities and session grants; the host remains authoritative. Missing required grants prevent startup, while missing optional grants allow graceful degradation. The exact query/result/revocation message types are **not yet standardized**; see [ADR 0006](../adr/0006-capability-negotiation.md).
+
+## Public VLG API (ADR 0008)
+
+The game-facing SDK calls `init(covil)` after the host has checked required grants and delivered `host.init`. The SDK reports `game.ready` on successful initialization; `host.start` remains the authority to begin gameplay. The public API uses `covil.has()`, `covil.request()` and capability-specific facades, not generic `covil.input()` / `covil.output()`. This is an API design contract, **not yet an implemented SDK**. See [ADR 0008](../adr/0008-vlg-public-api.md) and [API documentation](09-vlg-public-api.md).
