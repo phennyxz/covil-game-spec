@@ -52,3 +52,7 @@ Um jogo com `input.touch` obrigatório não inicia num host sem touch efetivamen
 ### Pendências de interoperabilidade
 
 Definir nomes canônicos, versão e namespace das capacidades, sintaxe definitiva no `manifest.json`, mensagens de consulta/resultado/alteração, política de prompts, estados de autorização, quotas, escopos e teste de conformidade. O schema e o validador 0.1 existentes ainda implementam o subconjunto legado `storage/network`; **não aceitar o exemplo acima como manifesto válido sem migração explícita**. Nenhum suporte a hardware está certificado por esta ADR.
+
+## Nota de implementação posterior (2026-11-19)
+
+As decisões posteriores da [ADR 0007](0007-capability-contract.md) e do [registro oficial](../docs/08-capability-registry.md) substituíram as pendências de manifesto e identificadores descritas acima: o manifesto usa `capabilities.required` e `capabilities.optional`, e o nome canônico de movimento é **`input.motion`** (não `sensors.motion`, citado no exemplo histórico). Schema, validador e exemplo foram migrados. Esta nota preserva o histórico sem fazer do exemplo antigo um contrato vigente. RPC de concessão e revogação continua pendente.
