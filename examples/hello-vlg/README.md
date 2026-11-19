@@ -1,9 +1,9 @@
 # Hello VLG
 
-A tiny framework-free game that moves a point using abstract directional actions. It demonstrates the proposed `covil.connect` bootstrap and lifecycle messages, **not** secure host implementation.
+Jogo mínimo independente de framework, usando o SDK experimental `sdk/covil-core.mjs` copiado para `covil-core.mjs` dentro do pacote. O manifesto exige `input.buttons` e `output.graphics`.
 
-Build the ZIP package with `node tools/build-example.mjs`. Do not open untrusted VLGs directly in a privileged page.
+`game.js` implementa `async init(covil)` e assina ações com `covil.controls.on`. O SDK implementa `game.ready` e o ciclo de vida sobre o `MessageChannel`. O host deve validar capacidades obrigatórias **antes** de executar o código.
 
-The manifest declares required capabilities `input.buttons` and `output.graphics` and no optional capabilities, using ADR 0007 lists. These identifiers are illustrative until the canonical capability registry is finalized. The prototype validator checks declaration structure, **not** actual device support or permissions.
+Gerar pacote: `node tools/build-example.mjs`. Validar: `node tools/validate-vlg.mjs dist/hello-vlg.vlg`.
 
-**API direction:** [ADR 0008](../../adr/0008-vlg-public-api.md) approves `async init(covil)` and capability-specific methods. This existing sample intentionally still exercises the low-level MessageChannel protocol; it is not yet migrated to an SDK.
+**Segurança:** este exemplo e o SDK não constituem um host seguro; não execute VLGs de terceiros em uma página privilegiada. RPC, permissões dinâmicas, assinatura Ed25519 e isolamento de produção continuam pendentes.
