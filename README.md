@@ -23,6 +23,8 @@ COVIL is an open, framework-independent specification for packaging and running 
 - [Versioning and conformance](docs/07-versioning.md)
 - [Capability registry](docs/08-capability-registry.md) and [machine-readable IDs](schemas/capabilities.registry.json)
 - [VLG public API](docs/09-vlg-public-api.md) and [ADR 0008](adr/0008-vlg-public-api.md)
+- [Audit and consolidation](docs/10-audit-and-consolidation.md) and [minimal core contract](docs/11-core-runtime-contract.md)
+- [Experimental SDK](sdk/covil-core.mjs), [capability preflight](host/capability-preflight.mjs) and [runtime tests](tests/conformance/runtime.test.mjs)
 - [Open questions](docs/open-questions.md)
 - [Minimal game](examples/hello-vlg/)
 - [Validator](tools/validate-vlg.mjs) and [tests](tests/conformance/)
@@ -51,3 +53,7 @@ Input device abstraction and host-managed control mapping are specified in [ADR 
 Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is complete, but runtime enforcement is pending.
 
 The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator, types, tests and example now use the approved lists; runtime capability discovery and permission enforcement remain pending; the canonical registry is published.
+
+## Consolidation status (2026-11-19)
+
+The documentation audit is published. A minimal experimental VLG SDK and pure capability preflight were added, and `hello-vlg` was migrated to `init(covil)`. **Tests were authored but not executed in this environment.** No hardened browser host, cryptographic verification, privileged capability bridge or second independent host is implemented. Do not load untrusted games.
