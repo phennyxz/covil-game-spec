@@ -13,6 +13,7 @@ COVIL is an open, framework-independent specification for packaging and running 
 
 ## Repository map
 
+- **[Start here: responsibilities and developer guide](docs/12-responsibilities-and-developer-guide.md)** — mandatory reading for game authors, AI agents and host implementers
 - [Founding document](docs/00-foundation.md)
 - [Architecture](docs/01-architecture.md)
 - [VLG package](docs/02-vlg-package.md)
