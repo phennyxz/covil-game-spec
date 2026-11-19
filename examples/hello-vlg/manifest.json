@@ -20,7 +20,10 @@
     ]
   },
   "capabilities": {
-    "storage": "none",
-    "network": "none"
+    "required": [
+      "input.buttons",
+      "output.graphics"
+    ],
+    "optional": []
   }
 }
