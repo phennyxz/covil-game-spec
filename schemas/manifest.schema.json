@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/phennyxz/covil-game-spec/blob/main/schemas/manifest.schema.json",
+  "title": "COVIL manifest 0.1 experimental subset",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "version",
+    "entry",
+    "runtime",
+    "display",
+    "input",
+    "capabilities"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)+$",
+      "maxLength": 128
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "entry": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?/)[A-Za-z0-9_./-]+\\.html$"
+    },
+    "runtime": {
+      "const": "web"
+    },
+    "display": {
+      "type": "object",
+      "required": [
+        "mode",
+        "orientation",
+        "aspectRatio"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "emulator",
+            "mobile",
+            "adaptive"
+          ]
+        },
+        "orientation": {
+          "enum": [
+            "portrait",
+            "landscape",
+            "any"
+          ]
+        },
+        "aspectRatio": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*:[1-9][0-9]*$"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "actions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": [
+        "storage",
+        "network"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "storage": {
+          "enum": [
+            "none",
+            "local"
+          ]
+        },
+        "network": {
+          "enum": [
+            "none",
+            "required"
+          ]
+        }
+      }
+    }
+  }
+}
