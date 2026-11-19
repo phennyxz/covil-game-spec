@@ -26,7 +26,7 @@ Display modes are `emulator`, `mobile`, and `adaptive`; input is independent of 
 
 The runtime must negotiate protocol version, session, granted capabilities, lifecycle, display and input changes, errors and shutdown. Optional services may include storage, audio, scores, achievements, cloud saves, public identity, multiplayer, networking and purchases.
 
-Package security proposes SHA-256 file inventory and Ed25519 signatures over precisely canonicalized metadata, with JCS (RFC 8785) under evaluation. Signatures do not establish that code is safe. Offline, online and hybrid operation are intended.
+Package security uses a SHA-256 file inventory and the Ed25519 signature contract approved by ADR 0002: sign the domain-separated **exact bytes** of `integrity.json` without JSON reserialization. JCS is not required. Signature verification is not yet implemented in the prototype. Signatures do not establish that code is safe. Offline, online and hybrid operation are intended.
 
 ## Success criterion
 
