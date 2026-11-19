@@ -17,3 +17,7 @@ Untrusted archives may include path traversal, duplicate names, ZIP bombs, malfo
 **Prototype caveat:** the CLI validator checks structure and hashes only. It does not provide a sandbox, Ed25519 verification, key revocation, malware scanning or safe publishing. Do not run arbitrary imported games as trusted content.
 
 **Approved signature architecture:** see [ADR 0002](../adr/0002-signature-design.md). Sign the domain-separated exact bytes of `integrity.json` with Ed25519; SHA-256 inventory covers every payload file including the manifest. Unsigned local packages require explicit developer mode; Jogai catalog packages require valid signatures from recognized developer keys. Key revocation and rollover details remain open. The current prototype does not implement Ed25519.
+
+## Approved execution isolation (ADR 0003)
+
+The **COVIL host**, not the VLG, enforces security. Treat every game as hostile even if signed. The Web/PWA reference host uses a sandboxed iframe with an isolated/opaque origin, restrictive CSP and permissions, and a per-session MessageChannel. The same boundary covers emulator, mobile and adaptive display modes. See [ADR 0003](../adr/0003-vlg-execution-isolation.md) for obligations, adversarial tests and browser limitations. The current tools are **not** a secure host.
