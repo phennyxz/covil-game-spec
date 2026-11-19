@@ -1,6 +1,6 @@
 # API pública do VLG — contrato de alto nível (0.1 experimental)
 
-**Decisão:** [ADR 0008](../adr/0008-vlg-public-api.md). **Estado:** desenho aprovado; SDK não implementado.
+**Decisão:** [ADR 0008](../adr/0008-vlg-public-api.md). **Estado:** desenho aprovado; SDK **mínimo experimental** implementado em [`sdk/covil-core.mjs`](../sdk/covil-core.mjs) para `init`, `has`, `controls.on` e eventos básicos de ciclo de vida. `request`, armazenamento, áudio e serviços privilegiados continuam não implementados.
 
 ## Entrada e ciclo de vida
 
@@ -58,4 +58,4 @@ Os identificadores seguem o [registro de capacidades](08-capability-registry.md)
 
 ## Próximas definições
 
-Esquemas de mensagens de chamada/resposta, erros, limites, eventos de revogação, quotas e testes de integração do SDK/host. O protótipo `hello-vlg` ainda utiliza o protocolo diretamente.
+Esquemas de mensagens de chamada/resposta, erros, limites, eventos de revogação, quotas e testes de integração do SDK/host. O protótipo `hello-vlg` foi migrado para o SDK mínimo; o SDK ainda usa o protocolo diretamente internamente. A verificação de capacidades antes da execução é responsabilidade do host.
