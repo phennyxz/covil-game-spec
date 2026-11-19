@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/phennyxz/covil-game-spec/blob/main/schemas/manifest.schema.json",
-  "title": "COVIL manifest 0.1 experimental subset",
+  "title": "COVIL manifest 0.1 experimental subset — ADR 0007",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -89,24 +89,35 @@
     "capabilities": {
       "type": "object",
       "required": [
-        "storage",
-        "network"
+        "required",
+        "optional"
       ],
       "additionalProperties": false,
       "properties": {
-        "storage": {
-          "enum": [
-            "none",
-            "local"
-          ]
+        "required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/capabilityId"
+          }
         },
-        "network": {
-          "enum": [
-            "none",
-            "required"
-          ]
+        "optional": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/capabilityId"
+          }
         }
       }
     }
-  }
+  },
+  "$defs": {
+    "capabilityId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[a-z][a-z0-9_-]*(?:\\.[a-z][a-z0-9_-]*)+$"
+    }
+  },
+  "$comment": "Cross-array disjointness is checked by the validator; JSON Schema 2020-12 cannot directly compare array members across properties."
 }
