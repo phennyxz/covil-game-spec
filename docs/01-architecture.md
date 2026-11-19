@@ -23,3 +23,7 @@ M1: minimal VLG ZIP, schema, integrity, sandboxed host, handshake, pause/resume/
 M2: canonical signatures, key trust policy, capability grants, offline package cache.
 
 M3: optional SDK and extensions. Do not implement M2/M3 claims as if they already exist.
+
+## Approved isolation boundary
+
+Per [ADR 0003](../adr/0003-vlg-execution-isolation.md), the COVIL console must contain hostile VLG code. The Web/PWA reference uses an origin-isolated sandboxed iframe and a private MessageChannel, independently of emulator/mobile/adaptive display. Optional Workers run inside that boundary; future native hosts may use OS processes. Security conformance requires adversarial tests.
