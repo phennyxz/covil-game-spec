@@ -27,3 +27,7 @@ M3: capability-specific SDK and extensions. A **minimal experimental SDK core** 
 ## Approved isolation boundary
 
 Per [ADR 0003](../adr/0003-vlg-execution-isolation.md), the COVIL console must contain hostile VLG code. The Web/PWA reference uses an origin-isolated sandboxed iframe and a private MessageChannel, independently of emulator/mobile/adaptive display. Optional Workers run inside that boundary; future native hosts may use OS processes. Security conformance requires adversarial tests.
+
+## Responsibility boundaries
+
+For a normative-intent ownership matrix, developer do/don't rules and a checklist for AI agents, read [responsibilities and developer guide](12-responsibilities-and-developer-guide.md). In short: game = mechanics and `init(covil)`; SDK = public API and protocol bridge; host = hardware mapping, lifecycle, isolation, permissions and trust enforcement; distributor = publication verification and signed authorization. An alternative SDK must remain protocol-compatible.
