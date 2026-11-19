@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.1",
+  "id": "org.example.hello",
+  "name": "Hello VLG",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "runtime": "web",
+  "display": {
+    "mode": "emulator",
+    "orientation": "portrait",
+    "aspectRatio": "4:3"
+  },
+  "input": {
+    "actions": [
+      "up",
+      "down",
+      "left",
+      "right",
+      "pause"
+    ]
+  },
+  "capabilities": {
+    "storage": "none",
+    "network": "none"
+  }
+}
