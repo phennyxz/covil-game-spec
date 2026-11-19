@@ -19,7 +19,7 @@ COVIL is an open, framework-independent specification for packaging and running 
 - [Manifest](docs/03-manifest.md) and [JSON Schema](schemas/manifest.schema.json)
 - [Runtime protocol](docs/04-runtime-protocol.md) and [TypeScript contracts](interfaces/covil.ts)
 - [Display and input](docs/05-display-input.md)
-- [Security](docs/06-security.md)
+- [Security](docs/06-security.md) and [distribution trust chain (ADR 0009)](adr/0009-distribution-trust-chain.md)
 - [Versioning and conformance](docs/07-versioning.md)
 - [Capability registry](docs/08-capability-registry.md) and [machine-readable IDs](schemas/capabilities.registry.json)
 - [VLG public API](docs/09-vlg-public-api.md) and [ADR 0008](adr/0008-vlg-public-api.md)
@@ -40,7 +40,7 @@ node tools/validate-vlg.mjs dist/hello-vlg.vlg
 node --test tests/conformance/*.test.mjs
 ```
 
-The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures. Do not publish untrusted games from this prototype without a secure isolated host.
+The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures **and** distributor authorization per ADR 0009; neither is implemented yet. Do not publish untrusted games from this prototype without a secure isolated host.
 
 ## License
 
@@ -57,3 +57,7 @@ The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required`
 ## Consolidation status (2026-11-19)
 
 The documentation audit is published. A minimal experimental VLG SDK and pure capability preflight were added, and `hello-vlg` was migrated to `init(covil)`. **Tests were authored but not executed in this environment.** No hardened browser host, cryptographic verification, privileged capability bridge or second independent host is implemented. Do not load untrusted games.
+
+## Distribution trust chain
+
+[ADR 0009](adr/0009-distribution-trust-chain.md) approves preserving the developer-signed VLG and adding a **separate signed distribution envelope**, outside the ZIP. Authorization to distribute and technical homologation are distinct claims. The current prototype does not implement the envelope, signatures, trust registry or homologation.
