@@ -10,6 +10,9 @@ for(const name of names){
  const data=await readFile(resolve(root,"examples/hello-vlg",name));
  entries.push([name,data]);files.push({path:name,size:data.length,sha256:createHash("sha256").update(data).digest("hex")});
 }
+const sdkData=await readFile(resolve(root,"sdk/covil-core.mjs"));
+entries.push(["covil-core.mjs",sdkData]);
+files.push({path:"covil-core.mjs",size:sdkData.length,sha256:createHash("sha256").update(sdkData).digest("hex")});
 const integrity=Buffer.from(JSON.stringify({schemaVersion:"0.1",algorithm:"sha256",files},null,2)+"\n");
 entries.push(["integrity.json",integrity]);
 await mkdir(resolve(root,"dist"),{recursive:true});
