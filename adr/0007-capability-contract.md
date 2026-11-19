@@ -44,3 +44,7 @@ A ADR **não** define hardware mínimo, pontuação de desempenho, FPS garantido
 ### Migração do protótipo
 
 O manifesto e o validador experimentais 0.1 existentes usam `capabilities: {storage, network}`. O novo formato aprovado **substitui** essa representação, mas schema, validador, exemplos e testes devem ser migrados em conjunto, sem afirmar suporte até essa integração estar concluída. Pacotes existentes precisarão ser atualizados ou tratados por uma política explícita de compatibilidade. Não interpretar automaticamente o formato antigo como concessão de novas capacidades.
+
+## Registro publicado
+
+O catálogo de identificadores da especificação experimental 0.1 está em [docs/08-capability-registry.md](../docs/08-capability-registry.md), com representação estruturada em [schemas/capabilities.registry.json](../schemas/capabilities.registry.json). A migração do manifesto, schema, validador e exemplos para `required`/`optional` foi realizada após a aprovação desta ADR; os contratos de execução por capacidade continuam pendentes.
