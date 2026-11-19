@@ -53,3 +53,7 @@ Um host de laboratório deve validar pacote e manifesto, comparar capacidades re
 - [ ] Assinatura Ed25519 e confiança implementadas antes de catálogo público
 
 **Conclusão:** a arquitetura está suficientemente definida para construir um núcleo de laboratório, **não** para declarar a especificação 0.1 segura ou certificada.
+
+## Decisão posterior: distribuição (ADR 0009)
+
+A assinatura do desenvolvedor permanece no VLG original. A autorização do distribuidor usa envelope externo, vinculado ao hash dos bytes exatos do VLG; homologação é uma declaração separada com evidências. A arquitetura está aprovada, mas schemas, assinaturas, verificação de confiança e testes continuam pendentes. Consultar [ADR 0009](../adr/0009-distribution-trust-chain.md).
