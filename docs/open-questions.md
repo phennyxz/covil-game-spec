@@ -2,8 +2,8 @@
 
 These items are deliberately **not** final requirements:
 
-1. Signature policy: mandatory for all VLGs or only catalog distribution?
-2. Canonical signed payload: RFC 8785 JCS for manifest and integrity, or another byte-level format?
+1. **Resolved (ADR 0002):** unsigned packages only in explicitly enabled developer mode; Jogai catalog requires a valid recognized developer signature.
+2. **Resolved (ADR 0002):** Ed25519 signs domain-separated exact `integrity.json` bytes, with no JSON reserialization.
 3. Key distribution, revocation, rotation and publisher identity.
 4. Host isolation strategy: separate origin, sandboxed iframe, service workers and offline asset serving.
 5. ZIP limits, compression methods, Unicode path normalization and duplicate detection.
