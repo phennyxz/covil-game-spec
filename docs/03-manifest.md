@@ -22,4 +22,6 @@ The draft [JSON Schema](../schemas/manifest.schema.json) checks the mandatory mi
 
 Input action declaration is approved by [ADR 0005](../adr/0005-input-controls.md): `input.actions` lists logical action identifiers, independent of physical controls. The host maps and delivers them through `host.input`.
 
-Future decisions: explicit optional vs required capabilities, origin allowlists, advanced input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
+[ADR 0006](../adr/0006-capability-negotiation.md) approves required/optional capability negotiation and the rule that missing required grants prevent launch. The current 0.1 schema still supports only the legacy `storage`/`network` subset; the new manifest shape and migration are pending. Do not treat conceptual ADR examples as currently valid manifests.
+
+Future decisions: capability schema migration, origin allowlists, advanced input schemas, minimum protocol versions, localization, icon metadata and game dependencies.
