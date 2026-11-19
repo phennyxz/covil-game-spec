@@ -45,3 +45,5 @@ See [LICENSE](LICENSE). Contributions welcome under [CONTRIBUTING.md](CONTRIBUTI
 Runtime lifecycle and host authority are specified in [ADR 0004](adr/0004-runtime-lifecycle-protocol.md); implementations and conformance tests are pending.
 
 Input device abstraction and host-managed control mapping are specified in [ADR 0005](adr/0005-input-controls.md).
+
+Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is pending.
