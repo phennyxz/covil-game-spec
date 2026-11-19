@@ -41,3 +41,5 @@ The prototype validator verifies package structure, SHA-256 integrity, and the m
 ## License
 
 See [LICENSE](LICENSE). Contributions welcome under [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Runtime lifecycle and host authority are specified in [ADR 0004](adr/0004-runtime-lifecycle-protocol.md); implementations and conformance tests are pending.
