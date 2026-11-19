@@ -21,3 +21,7 @@ Untrusted archives may include path traversal, duplicate names, ZIP bombs, malfo
 ## Approved execution isolation (ADR 0003)
 
 The **COVIL host**, not the VLG, enforces security. Treat every game as hostile even if signed. The Web/PWA reference host uses a sandboxed iframe with an isolated/opaque origin, restrictive CSP and permissions, and a per-session MessageChannel. The same boundary covers emulator, mobile and adaptive display modes. See [ADR 0003](../adr/0003-vlg-execution-isolation.md) for obligations, adversarial tests and browser limitations. The current tools are **not** a secure host.
+
+## Two-stage trust (ADR 0009)
+
+The developer signs the original inventory. A publishing server verifies developer identity, signature and package integrity, then may issue a separate distributor-signed authorization envelope bound to the exact VLG bytes. A technical homologation statement, if present, is a distinct evidence-backed claim; neither signature guarantees harmless code. Consoles enforce their own trusted distributor keys, validity, scope, integrity and sandbox. Offline revocation is necessarily bounded by locally available signed trust metadata and policy. This is an **approved architecture, not an implemented security mechanism**. See [ADR 0009](../adr/0009-distribution-trust-chain.md).
