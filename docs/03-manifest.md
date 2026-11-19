@@ -29,3 +29,5 @@ Future decisions: canonical capability registry, origin allowlists, advanced inp
 ## Approved capability contract (ADR 0007)
 
 The target manifest shape is `capabilities: {required: string[], optional: string[]}` with namespaced capability identifiers. Missing or unknown required capabilities prevent launch; missing or unknown optional capabilities do not. No CPU/GPU/RAM minimums are part of the MVP. See [ADR 0007](../adr/0007-capability-contract.md). **Manifest migration completed:** schema, prototype validator, types, example and conformance tests use the approved lists. This does not implement runtime capability detection or granting.
+
+The canonical identifiers and their functional meanings are documented in [COVIL 0.1 capability registry](08-capability-registry.md). The validator intentionally accepts well-formed unknown identifiers; compatibility decisions belong to the host.
