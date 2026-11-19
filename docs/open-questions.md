@@ -8,7 +8,7 @@ These items are deliberately **not** final requirements:
 4. **Partly resolved (ADR 0003):** Web/PWA reference host uses origin-isolated sandboxed iframe and private MessageChannel. Offline asset serving, detailed CSP, network restrictions and cross-game storage isolation remain to be designed.
 5. ZIP limits, compression methods, Unicode path normalization and duplicate detection.
 6. **Partly resolved (ADR 0004):** host-owned lifecycle, core message names, pause and unilateral termination approved; exact error codes, acknowledgements, timeouts, rate limits and protocol negotiation remain open.
-7. **Partly resolved (ADRs 0006–0007):** `capabilities.required` / `capabilities.optional` manifest shape and no-start on missing required grant approved; schema/validator/examples migrated; define canonical capability registry, network origin allowlists, permission UX and storage quota.
+7. **Partly resolved (ADRs 0006–0007):** `capabilities.required` / `capabilities.optional` manifest shape and no-start on missing required grant approved; schema/validator/examples migrated; canonical capability registry published (docs/08); define individual APIs, network origin allowlists, permission UX and storage quota.
 8. Compatibility strategy for protocol minor/major versions, extensions and legacy manifest migration.
 9. Independent second-host test fixture and test certification process.
 10. Governance, trademark, licensing and change approval policy.
