@@ -21,6 +21,7 @@ COVIL is an open, framework-independent specification for packaging and running 
 - [Display and input](docs/05-display-input.md)
 - [Security](docs/06-security.md)
 - [Versioning and conformance](docs/07-versioning.md)
+- [Capability registry](docs/08-capability-registry.md) and [machine-readable IDs](schemas/capabilities.registry.json)
 - [Open questions](docs/open-questions.md)
 - [Minimal game](examples/hello-vlg/)
 - [Validator](tools/validate-vlg.mjs) and [tests](tests/conformance/)
