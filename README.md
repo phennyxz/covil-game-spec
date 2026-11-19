@@ -48,4 +48,4 @@ Input device abstraction and host-managed control mapping are specified in [ADR 
 
 Capability discovery, required/optional grants and compatibility policy are approved in [ADR 0006](adr/0006-capability-negotiation.md); the manifest schema migration is pending.
 
-The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator and example migration remain pending; the existing prototype still accepts only the legacy fields.
+The [ADR 0007](adr/0007-capability-contract.md) approves `capabilities.required` and `capabilities.optional` without hardware minimums. Schema, validator, types, tests and example now use the approved lists; runtime capability discovery, permission enforcement and the canonical registry remain pending.
