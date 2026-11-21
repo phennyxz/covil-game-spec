@@ -42,3 +42,7 @@ node --test tests/conformance/*.test.mjs
 - Changes to a public contract include docs, a conformance test, and an ADR when significant.
 - Report commands actually executed and failures; do not claim tests ran if they did not.
 - Do not claim production readiness: signed trust chain, hardened host and independent interoperability remain pending.
+
+## VLG path policy
+
+Do not impose a fixed directory layout on game authors. Only `manifest.json`, `integrity.json`, and optional `signature.json` have reserved root paths. `manifest.entry` may point to nested HTML; all game-authored resources may be nested freely and must appear in the SHA-256 inventory. Preserve archive-relative paths in hosts. The inventory is an integrity map, **not** a JavaScript import resolver: ensure relative HTML/CSS/JS references resolve from their containing files. The experimental builder injects `covil-core.mjs` at the archive root; use `../covil-core.mjs` from `src/game.js`, for example.
