@@ -33,3 +33,11 @@ The integrity inventory cannot include its own hash. The signature file cannot c
 ## Distribution envelope (ADR 0009)
 
 A distributor's second signature is **not** inserted into the original VLG ZIP. The original developer-signed `.vlg` remains unchanged; a separate `distribution.json` and `distribution.sig` envelope binds authorization to the exact package bytes via SHA-256. This avoids invalidating the ADR 0002 inventory-completeness rule. Distribution authorization and technical homologation are separate claims. The envelope schema and signature verifier are not yet implemented. See [ADR 0009](../adr/0009-distribution-trust-chain.md).
+
+## Internal layout and inventory (approved clarification)
+
+The VLG format does **not** prescribe directories for game code or assets. Game authors may organize HTML, JavaScript, CSS, images, audio, and other local resources in arbitrary nested directories, provided every path is safe, normalized, unique, and present in `integrity.json` with its exact uncompressed byte length and SHA-256 hash. The inventory maps archive-relative paths to bytes for integrity verification; it does not rewrite imports or act as a module resolver.
+
+Only package metadata has fixed locations at the archive root: `manifest.json`, `integrity.json`, and `signature.json` when signed. The HTML entrypoint is located by the `manifest.entry` archive-relative path and may itself be nested. The host must preserve the archive-relative path hierarchy when exposing verified files to the isolated game context. HTML references, CSS URLs, and JavaScript imports retain their normal relative-resolution semantics.
+
+The experimental builder currently injects the SDK at the archive root as `covil-core.mjs`. Therefore a JavaScript module in `src/game.js` must import `../covil-core.mjs` (not `./covil-core.mjs`). The SDK location is a tooling convention in 0.1, not a restriction on the locations of game-authored files. This clarification changes no ZIP structure, hashing algorithm, or manifest field.
