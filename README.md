@@ -11,6 +11,13 @@ COVIL is an open, framework-independent specification for packaging and running 
 
 > **Status:** experimental proposal. The files in `docs/` distinguish proposed contracts from settled architectural principles. Do not claim full compliance or production-grade sandboxing based on this prototype.
 
+
+## Especificação consolidada por oito setores
+
+**[Comece por specs/README.md](specs/README.md)**: TEC (técnica), SEC (segurança), APP (API de jogo), PAC (pacote VLG), CAP (capacidades), RUN (host/runtime), DIS (distribuição) e DEV (desenvolvimento). Cada setor apresenta finalidade, regras, exemplo e referências às ADRs, schemas e implementações existentes. [Mapa de migração](specs/MIGRATION.md).
+
+O objetivo continua simples: desenvolver HTML/JS/CSS que rode localmente no navegador, empacotar em VLG e executá-lo em hosts compatíveis. Autoridade certificadora, registro federado e DRM **não** são requisitos para desenvolvimento local ou para o MVP. O Trust Registry e os localizadores de autoridade são propostas documentadas, não serviços operacionais.
+
 ## Repository map
 
 - **[Start here: responsibilities and developer guide](docs/12-responsibilities-and-developer-guide.md)** — mandatory reading for game authors, AI agents and host implementers
