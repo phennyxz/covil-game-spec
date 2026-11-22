@@ -1,5 +1,5 @@
-# TEC — Technical Specification
-Shared identifiers, versioning, compatibility, technical terminology and normative conventions. See `docs/00-foundation.md` and `docs/07-versioning.md`.
+# TEC — Técnica
 
-## Propostas
-- [Fundação do COVIL Trust Registry](001-trust-registry-foundation.md)
+[Fundamentos, escopo, regras e exemplo](000-scope-and-governance.md).
+
+[Fundação proposta do COVIL Trust Registry](001-trust-registry-foundation.md) — serviço independente e opcional.
