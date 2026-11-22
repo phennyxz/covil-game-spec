@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://covil.dev/schemas/distribution.schema.json",
+  "title": "COVIL distribution authorization envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "issuer", "issuerKeyId", "releaseId", "issuedAt", "expiresAt", "packageSha256", "integritySha256", "developerKeyId", "gameId", "gameVersion", "scope", "authorization", "homologation"],
+  "properties": {
+    "schemaVersion": { "const": "0.1" },
+    "issuer": { "const": "jogai" },
+    "issuerKeyId": { "type": "string", "pattern": "^ed25519-sha256:[0-9a-f]{64}$" },
+    "releaseId": { "type": "string", "format": "uuid" },
+    "issuedAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "packageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "integritySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "developerKeyId": { "type": "string", "pattern": "^ed25519-sha256:[0-9a-f]{64}$" },
+    "gameId": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)+$" },
+    "gameVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "scope": {
+      "type": "object", "additionalProperties": false, "required": ["catalog", "channel"],
+      "properties": { "catalog": { "const": "jogai" }, "channel": { "const": "public" } }
+    },
+    "authorization": { "const": "publish" },
+    "homologation": { "type": ["object", "null"] }
+  }
+}
