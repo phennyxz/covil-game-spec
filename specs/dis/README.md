@@ -1,5 +1,5 @@
-# DIS — Distribution Specification
-Catalog publishing, distributor signatures, authorization envelopes and homologation. See ADR 0009 and ADR 0010.
+# DIS — Distribuição
 
-## Propostas
-- [DIS-001 — Destinos e autoridades de distribuição](001-destination-and-authority-policy.md)
+[Publicação: finalidade, regras e exemplo de release](000-distribution-contract.md).
+
+[DIS-001 — Destinos e autoridades de distribuição](001-destination-and-authority-policy.md) — proposta.
