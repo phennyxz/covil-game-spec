@@ -1,34 +1,40 @@
-# COVIL Specification — sector index
+# COVIL Game Specification — oito setores
 
-Status: proposed organization (documentation-only). Existing approved ADRs remain authoritative until formally superseded.
+**Versão:** 0.1 experimental. **Status:** organização documental; não representa certificação, implementação completa ou aprovação de propostas. O COVIL permite criar jogos HTML/JS/CSS comuns, empacotá-los como VLG e executá-los em hosts compatíveis, sem exigir Jogai, engine ou serviço central.
 
-| Sector | Scope | Normative boundary |
+## Escolha seu setor
+
+| Setor | Destinação | Entrada |
 |---|---|---|
-| TEC | Shared technical conventions, versions, identifiers, interoperability | Common contracts |
-| SEC | Integrity, trust, signatures, OFPI, quarantine, security requirements | Cross-cutting security obligations |
-| APP | Game-facing API, lifecycle events, application behavior | Game/host application contract |
-| PAC | VLG ZIP layout, metadata, file inventory, package construction | Package representation |
-| CAP | Capability identifiers, negotiation, grants, revocation | Resource access contract |
-| RUN | Host execution, sandbox implementation, runtime states, resource management | Runtime enforcement |
-| DIS | Catalog publishing, distributor authorization, homologation, updates | Distribution lifecycle |
-| DEV | SDK, tooling, examples, test and conformance guidance | Developer workflows |
+| **TEC** — Técnica | Escopo, terminologia, versões, governança e compatibilidade | [TEC](tec/000-scope-and-governance.md) |
+| **SEC** — Segurança | Integridade, assinaturas, confiança, isolamento, OFPI e autoridades | [SEC](sec/000-security-model.md) |
+| **APP** — Aplicação | API usada pelo jogo, init, eventos e lifecycle | [APP](app/000-game-api.md) |
+| **PAC** — Pacote | ZIP VLG, manifesto, inventário e caminhos | [PAC](pac/000-vlg-package.md) |
+| **CAP** — Capacidades | IDs, required/optional, concessões e revogação | [CAP](cap/000-capability-contract.md) |
+| **RUN** — Execução | Host, sandbox, MessageChannel, estados e controles | [RUN](run/000-host-runtime.md) |
+| **DIS** — Distribuição | Publicação, autorização, canais e envelope externo | [DIS](dis/000-distribution-contract.md) |
+| **DEV** — Desenvolvedor | Fluxo de build, SDK, exemplos e testes | [DEV](dev/000-developer-workflow.md) |
 
-Potential future sector: NET (multiplayer and external game networking), **not** a current normative sector.
+**[Mapa de migração e fontes existentes](MIGRATION.md)** — onde encontrar ADRs, schemas, código e o status real de cada contrato.
 
-## Governance
-- Each sector maintains versioned normative requirements identified as `COVIL-<SECTOR>-NNN`.
-- Use MUST, SHOULD, MAY with their usual normative meanings; distinguish proposals from implemented behavior.
-- Each requirement should link tests, schemas and relevant ADRs when applicable.
-- The umbrella COVIL compatibility version identifies compatible sector versions; sector revisions can evolve independently.
-- Approved ADRs preserve decision history; migration of documentation does not change approved behavior.
-- Avoid duplicate normative rules: PAC defines inventory representation; SEC owns integrity acceptance and quarantine; RUN enforces execution isolation; CAP owns capability grants.
-- SEC applies across every sector, not merely to packages.
-- Existing `docs/`, `adr/`, `schemas/`, `sdk/`, `tools/`, `tests/` and `examples/` remain in place during incremental migration. Do not assume empty sector directories or this index are implementation evidence.
+## Como usar
+- **Autor de jogo:** comece por DEV → PAC → APP → CAP. Seu jogo deve funcionar localmente como Web comum; o SDK cuida da integração COVIL.
+- **Implementador de host:** comece por RUN → SEC → CAP → PAC → APP.
+- **Distribuidor:** comece por DIS → SEC → PAC.
+- **Mantenedor do padrão:** comece por TEC → MIGRATION → ADRs.
 
-## First security rule
-[COVIL-SEC-001 — Strict Package Integrity and OFPI Quarantine](sec/001-strict-package-integrity-ofpi.md) is a proposed normative rule requiring implementation and conformance testing before public untrusted-package acceptance.
+## Extensões e propostas
+- [SEC-001 — Integridade estrita e quarentena OFPI](sec/001-strict-package-integrity-ofpi.md).
+- [SEC-002 — Localizadores de autoridades e resolução de confiança](sec/002-authority-discovery-trust-resolution.md).
+- [TEC — Fundação do COVIL Trust Registry](tec/001-trust-registry-foundation.md).
+- [DIS-001 — Destinos e autoridades de distribuição](dis/001-destination-and-authority-policy.md).
 
-## Autoridades e distribuição
-- [SEC-002 — Descoberta de autoridades e resolução de confiança](sec/002-authority-discovery-trust-resolution.md)
-- [TEC — Fundação do COVIL Trust Registry](tec/001-trust-registry-foundation.md)
-- [DIS-001 — Destinos e autoridades de distribuição](dis/001-destination-and-authority-policy.md)
+## Governança
+1. Cada setor tem responsabilidade exclusiva; SEC é transversal. PAC descreve bytes; SEC decide aceitação; RUN executa; CAP concede recursos; DIS publica; APP expõe API; DEV orienta ferramentas; TEC coordena versões.
+2. Identificadores normativos seguem `COVIL-<SETOR>-NNN` quando houver regra formalizada. Documento `000` é um guia de entrada e **não** cria requisitos novos.
+3. MUST/SHOULD/MAY expressam requisitos alvo; sempre marcar proposta, aprovado, implementado e testado separadamente.
+4. ADRs aprovadas e schemas atuais não são alterados implicitamente por esta reorganização.
+5. NET (multiplayer) é candidato futuro, não um nono setor atual.
+6. Não introduzir DRM, federação obrigatória, autoridade central ou mínimos de hardware no núcleo.
+
+**Critério de sucesso:** o mesmo VLG funciona em dois hosts independentes sem modificação do jogo. Atualmente isso **não foi demonstrado**.
