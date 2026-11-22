@@ -27,3 +27,8 @@ Potential future sector: NET (multiplayer and external game networking), **not**
 
 ## First security rule
 [COVIL-SEC-001 — Strict Package Integrity and OFPI Quarantine](sec/001-strict-package-integrity-ofpi.md) is a proposed normative rule requiring implementation and conformance testing before public untrusted-package acceptance.
+
+## Autoridades e distribuição
+- [SEC-002 — Descoberta de autoridades e resolução de confiança](sec/002-authority-discovery-trust-resolution.md)
+- [TEC — Fundação do COVIL Trust Registry](tec/001-trust-registry-foundation.md)
+- [DIS-001 — Destinos e autoridades de distribuição](dis/001-destination-and-authority-policy.md)
