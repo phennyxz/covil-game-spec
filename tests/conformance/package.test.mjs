@@ -26,3 +26,13 @@ test("reject duplicate required capability",()=>assert.throws(()=>validateBytes(
 test("reject capability in both lists",()=>assert.throws(()=>validateBytes(archive({capabilities:{required:["input.buttons"],optional:["input.buttons"]}})),/Invalid capabilities/));
 test("reject malformed capability name",()=>assert.throws(()=>validateBytes(archive({capabilities:{required:["input buttons"],optional:[]}})),/Invalid capabilities/));
 test("reject unexpected capability property",()=>assert.throws(()=>validateBytes(archive({capabilities:{required:[],optional:[],storage:"none"}})),/Invalid capabilities/));
+
+// Editorial metadata is optional for developer packages; if present, it is strict.
+test("accept valid editorial metadata",()=>{
+ const m={...manifest,metadata:{title:"Test",description:"Game description",languages:["pt-BR"],genres:["arcade"],tags:["test"],ageRating:{system:"CLASSIND",value:"L",status:"self_declared"},content:{violence:false,userInteraction:false,advertising:false,inAppPurchases:false}}};
+ const payload=Buffer.from("<!doctype html><title>Test</title>");
+ const mb=Buffer.from(JSON.stringify(m));
+ const files=[["manifest.json",mb],["index.html",payload]];
+ const integrity=Buffer.from(JSON.stringify({schemaVersion:"0.1",algorithm:"sha256",files:files.map(([path,b])=>({path,size:b.length,sha256:createHash("sha256").update(b).digest("hex")}))}));
+ assert.equal(validateBytes(writeZip([...files,["integrity.json",integrity]])).id,"org.example.test");
+});
