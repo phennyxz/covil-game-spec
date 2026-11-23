@@ -17,6 +17,8 @@
 
 **[Revisão transversal e pendências de consolidação — 2026-11-23](REVIEW-2026-11-23.md)** — matriz de conformidade, ambiguidades, decisões a formalizar e critérios de saída.
 
+**[ADR 0011 — Conformidade, reconhecimento e autonomia do host](../adr/0011-conformance-recognition-and-host-autonomy.md)** — separa autoria, reconhecimento da CA e decisões de plataforma.
+
 **[Mapa de migração e fontes existentes](MIGRATION.md)** — onde encontrar ADRs, schemas, código e o status real de cada contrato.
 
 ## Como usar
