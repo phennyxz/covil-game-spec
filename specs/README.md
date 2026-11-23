@@ -15,6 +15,8 @@
 | **DIS** — Distribuição | Publicação, autorização, canais e envelope externo | [DIS](dis/000-distribution-contract.md) |
 | **DEV** — Desenvolvedor | Fluxo de build, SDK, exemplos e testes | [DEV](dev/000-developer-workflow.md) |
 
+**[Revisão transversal e pendências de consolidação — 2026-11-23](REVIEW-2026-11-23.md)** — matriz de conformidade, ambiguidades, decisões a formalizar e critérios de saída.
+
 **[Mapa de migração e fontes existentes](MIGRATION.md)** — onde encontrar ADRs, schemas, código e o status real de cada contrato.
 
 ## Como usar
