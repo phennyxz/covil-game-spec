@@ -52,7 +52,7 @@ node --test tests/conformance/*.test.mjs
 
 To package another game, replace the source directory and output name: `node tools/covil-build.mjs my-game dist/my-game.vlg`. The builder discovers nested assets, generates `integrity.json`, rejects reserved metadata and validates the output. It creates **unsigned development packages only**; it does not run games, verify signatures or implement a secure host. The older `tools/build-example.mjs` remains as a fixed-file example and is not the recommended builder.
 
-The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures **and** distributor authorization per ADR 0009; neither is implemented yet. Do not publish untrusted games from this prototype without a secure isolated host.
+The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; a política de catálogo é responsabilidade do host; a ADR 0011 torna o envelope da ADR 0009 opcional. Assinaturas e reconhecimento não estão implementados neste protótipo. Do not publish untrusted games from this prototype without a secure isolated host.
 
 ## License
 
@@ -72,4 +72,4 @@ The documentation audit is published. A minimal experimental VLG SDK and pure ca
 
 ## Distribution trust chain
 
-[ADR 0009](adr/0009-distribution-trust-chain.md) approves preserving the developer-signed VLG and adding a **separate signed distribution envelope**, outside the ZIP. Authorization to distribute and technical homologation are distinct claims. The current prototype does not implement the envelope, signatures, trust registry or homologation.
+[ADR 0009](adr/0009-distribution-trust-chain.md) approves preserving the developer-signed VLG and adding a **optional separate signed distribution envelope**, outside the ZIP. Authorization to distribute and technical homologation are distinct claims. The current prototype does not implement the envelope, signatures, trust registry or homologation.
