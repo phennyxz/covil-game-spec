@@ -11,6 +11,15 @@ COVIL is an open, framework-independent specification for packaging and running 
 
 > **Status:** experimental proposal. The files in `docs/` distinguish proposed contracts from settled architectural principles. Do not claim full compliance or production-grade sandboxing based on this prototype.
 
+## SDP and VLG — generic ZIP and game-specific ZIP
+
+**[SDP](https://github.com/phennyxz/SDP-Self-Declared-Digital-Package-Standard)** is the generic, open self-declared digital ZIP standard. **VLG** is the game-specific SDP specialization with COVIL display, input, capabilities and lifecycle contracts. The current legacy VLG 0.1 is **not** SDP-compatible; an additive experimental SDP-backed variant is available without changing legacy builders or validators. See [integration guide](docs/13-sdp-vlg-integration.md) and [ADR 0012](adr/0012-sdp-vlg-profile.md).
+
+```sh
+node tools/build-sdp-vlg.mjs examples/hello-vlg dist/hello-sdp.vlg --creator-id example.author --creator-name "Example Author"
+node tools/validate-sdp-vlg.mjs dist/hello-sdp.vlg
+```
+
 ## Repository map
 
 - **[Start here: responsibilities and developer guide](docs/12-responsibilities-and-developer-guide.md)** — mandatory reading for game authors, AI agents and host implementers
