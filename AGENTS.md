@@ -46,3 +46,9 @@ node --test tests/conformance/*.test.mjs
 ## VLG path policy
 
 Do not impose a fixed directory layout on game authors. Only `manifest.json`, `integrity.json`, and optional `signature.json` have reserved root paths. `manifest.entry` may point to nested HTML; all game-authored resources may be nested freely and must appear in the SHA-256 inventory. Preserve archive-relative paths in hosts. The inventory is an integrity map, **not** a JavaScript import resolver: ensure relative HTML/CSS/JS references resolve from their containing files. The experimental builder injects `covil-core.mjs` at the archive root; use `../covil-core.mjs` from `src/game.js`, for example.
+
+
+## Navegação setorial (consolidação documental)
+
+Antes de alterar um contrato, consulte [specs/README.md](specs/README.md), o guia do setor relevante e [specs/MIGRATION.md](specs/MIGRATION.md). Os guias setoriais 000 explicam propósito, regras e exemplos, mas **não substituem** ADRs aprovadas, schemas nem testes. SEC-001, SEC-002, DIS-001 e Trust Registry são propostas, não funcionalidades existentes. Não introduzir dependência obrigatória de registro de chaves, grupo de hosts, criptografia de conteúdo ou serviços Jogai no build local.
+

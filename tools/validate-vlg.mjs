@@ -7,7 +7,8 @@ export function validateBytes(bytes){
  if(entries.has("signature.json"))throw Error("Signatures are not supported by this prototype");
  const manifest=JSON.parse(entries.get("manifest.json").toString("utf8"));
  const required=["schemaVersion","id","name","version","entry","runtime","display","input","capabilities"];
- if(required.some(k=>!(k in manifest))||Object.keys(manifest).some(k=>!required.includes(k)))throw Error("Manifest fields invalid");
+ const allowed=[...required,"metadata"];
+ if(required.some(k=>!(k in manifest))||Object.keys(manifest).some(k=>!allowed.includes(k)))throw Error("Manifest fields invalid");
  if(manifest.schemaVersion!=="0.1"||manifest.runtime!=="web"||! /^[a-z0-9]+(?:[.-][a-z0-9]+)+$/.test(manifest.id)||!manifest.name||!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(manifest.version))throw Error("Invalid manifest identity");
  if(typeof manifest.entry!=="string"||! /^(?!\/)(?!.*(?:^|\/)\.\.?\/)[A-Za-z0-9_./-]+\.html$/.test(manifest.entry)||!entries.has(manifest.entry))throw Error("Invalid entrypoint");
  if(!["emulator","mobile","adaptive"].includes(manifest.display?.mode)||!["portrait","landscape","any"].includes(manifest.display?.orientation)||! /^[1-9]\d*:[1-9]\d*$/.test(manifest.display?.aspectRatio))throw Error("Invalid display");
@@ -20,6 +21,17 @@ export function validateBytes(bytes){
  const allCaps=[...caps.required,...caps.optional];
  if(allCaps.some(x=>typeof x!=="string"||x.length>128||!capabilityId.test(x))||
     new Set(allCaps).size!==allCaps.length)throw Error("Invalid capabilities");
+
+ if(Object.hasOwn(manifest,"metadata")) {
+  const m=manifest.metadata;
+  const keys=["title","description","languages","genres","tags","ageRating","content"];
+  const isObj=x=>x!==null&&typeof x==="object"&&!Array.isArray(x);
+  const exact=(o,ks)=>isObj(o)&&Object.keys(o).length===ks.length&&ks.every(k=>Object.hasOwn(o,k));
+  const str=(x,max)=>typeof x==="string"&&x.length>0&&x.length<=max;
+  const arr=(x,re,max)=>Array.isArray(x)&&new Set(x).size===x.length&&x.every(v=>typeof v==="string"&&v.length<=max&&re.test(v));
+  const age=["system","value","status"], content=["violence","userInteraction","advertising","inAppPurchases"];
+  if(!exact(m,keys)||!str(m.title,160)||!str(m.description,2000)||!arr(m.languages,/^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/,40)||m.languages.length===0||!arr(m.genres,/^[a-z][a-z0-9_-]*$/,40)||!arr(m.tags,/^[a-z][a-z0-9_-]*$/,40)||!exact(m.ageRating,age)||!str(m.ageRating.system,40)||!str(m.ageRating.value,40)||!["self_declared","official","unknown"].includes(m.ageRating.status)||!exact(m.content,content)||content.some(k=>m.content[k]!==null&&typeof m.content[k]!=="boolean"))throw Error("Invalid editorial metadata");
+ }
  const inventory=JSON.parse(entries.get("integrity.json").toString("utf8"));
  if(inventory.schemaVersion!=="0.1"||inventory.algorithm!=="sha256"||!Array.isArray(inventory.files))throw Error("Invalid integrity manifest");
  const listed=new Set();
