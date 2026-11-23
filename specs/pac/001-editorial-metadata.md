@@ -1,6 +1,6 @@
 # PAC — Metadados editoriais do VLG (proposta)
 
-**Destinação:** declarar informações de identificação, descoberta, classificação e conteúdo do jogo remetido a hosts COVIL. **Estado:** proposta documental; ainda não altera o schema `manifest.schema.json` 0.1, o builder nem o validador.
+**Destinação:** declarar informações de identificação, descoberta, classificação e conteúdo do jogo remetido a hosts COVIL. **Estado:** perfil editorial opcional integrado ao schema e validador experimental 0.1; obrigatoriedade para remessa oficial, taxonomias e homologação permanecem políticas externas e propostas.
 
 ## Princípios
 
@@ -49,7 +49,7 @@
 }
 ```
 
-**Exemplo não normativo:** não representa classificação efetivamente concedida e não deve ser interpretado como manifesto 0.1 validável. O manifesto completo conserva os campos técnicos atuais, como `entry`, `runtime`, `input` e `capabilities`.
+**Exemplo de seção `metadata` aceito pelo schema experimental 0.1**, quando incorporado a um manifesto completo. A classificação `self_declared` não representa reconhecimento oficial. O manifesto completo conserva os campos técnicos atuais, como `entry`, `runtime`, `input` e `capabilities`.
 
 ## Recebimento, OFPI e homologação
 
@@ -68,4 +68,4 @@
 
 ## Próxima etapa normativa
 
-Antes de incorporar ao schema, definir taxonomias, campos exigidos por perfil, validação de conteúdo, internacionalização, política de classificação etária e testes de conformidade. Fazer a alteração por revisão versionada do contrato, preservando a compatibilidade declarada da versão 0.1.
+A inclusão opcional em 0.1 não exige metadados de pacotes legados. Para remessa oficial, definir taxonomias, campos exigidos por perfil, validação de conteúdo, internacionalização, política de classificação etária e testes. A semântica de `null` nos indicadores de conteúdo é desconhecido/não declarado, nunca equivale a `false`.
