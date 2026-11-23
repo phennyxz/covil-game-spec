@@ -12,9 +12,9 @@
 
 ## Exemplo de mensagem
 ```json
-{"covil":"0.1","sessionId":"opaque-random-session","id":"message-1","type":"host.init","payload":{"protocol":"0.1","capabilities":[]}}
+{"covil":"0.1","sessionId":"opaque-random-session-id-at-least-16-chars","id":"message-1","type":"host.init","payload":{"protocol":"0.1","capabilities":["input.buttons","output.graphics"],"actions":["left","right"]}}
 ```
-O exemplo é ilustrativo: payload real pode incluir viewport e ações. Não é autorização para aceitar sessão previsível ou incompleta.
+O exemplo é ilustrativo: a sessão deve ser imprevisível, e o payload real pode incluir viewport e outros dados previstos no protocolo. O SDK experimental exige `protocol`, `capabilities` e `actions`.
 
 ## Fontes
 [Protocolo](../../docs/04-runtime-protocol.md), [núcleo](../../docs/11-core-runtime-contract.md), [display/entrada](../../docs/05-display-input.md), [ADR 0003](../../adr/0003-vlg-execution-isolation.md), [ADR 0004](../../adr/0004-runtime-lifecycle-protocol.md), [ADR 0005](../../adr/0005-input-controls.md).
