@@ -28,13 +28,15 @@ async function fixture(t) {
 test("generic builder includes nested assets, official SDK and valid hashes",async t=>{
   const {src,out}=await fixture(t);
   const result=await build(src,out);
-  assert.equal(result.files,5);
+  assert.equal(result.files,6);
   const bytes=await readFile(out);
   assert.equal(validateBytes(bytes).id,manifest.id);
   const entries=readZip(bytes);
   assert.ok(entries.has("assets/food.svg"));
   assert.ok(entries.has("covil-core.mjs"));
   assert.ok(entries.has("integrity.json"));
+  assert.ok(entries.has("sdp.json"));
+  assert.equal(JSON.parse(entries.get("integrity.json")).sdpVersion,"0.1");
 });
 test("generic builder is deterministic for identical inputs",async t=>{
   const {src,out,dir}=await fixture(t);

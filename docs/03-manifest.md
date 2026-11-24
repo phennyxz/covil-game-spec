@@ -1,5 +1,8 @@
 # Manifest contract (experimental subset)
 
+> **Nota canônica:** `manifest.json` é o contrato específico de jogo COVIL. O pacote VLG também exige `sdp.json` (declaração SDP) e `integrity.json` no formato SDP. Consulte [integração SDP–VLG](13-sdp-vlg-integration.md). O manifesto de jogo não substitui `sdp.json`.
+
+
 The root `manifest.json` declares game identity, version, entrypoint, runtime, display, input and capabilities. The executable code must not depend on Jogai internals.
 
 The draft [JSON Schema](../schemas/manifest.schema.json) checks the mandatory minimum; it is intentionally restrictive and not a complete standard.

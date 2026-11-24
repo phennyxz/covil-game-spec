@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import {writeZip} from "../../tools/zip.mjs";
-import {validateBytes} from "../../tools/validate-vlg.mjs";
+import {validateBytes} from "../../tools/legacy-validate-vlg.mjs";
 const manifest={schemaVersion:"0.1",id:"org.example.test",name:"Test",version:"1.0.0",entry:"index.html",runtime:"web",display:{mode:"emulator",orientation:"portrait",aspectRatio:"4:3"},input:{actions:["pause"]},capabilities:{required:["input.buttons","output.graphics"],optional:[]}};
 function archive({badHash=false,extra=false,path="index.html",capabilities=manifest.capabilities}={}){
  const payload=Buffer.from("<!doctype html><title>Test</title>");
@@ -13,7 +13,7 @@ function archive({badHash=false,extra=false,path="index.html",capabilities=manif
  if(extra)files.push(["extra.js",Buffer.from("bad")]);
  return writeZip(files);
 }
-test("valid minimal package",()=>assert.equal(validateBytes(archive()).id,"org.example.test"));
+test("legacy regression: valid minimal package",()=>assert.equal(validateBytes(archive()).id,"org.example.test"));
 test("reject hash mismatch",()=>assert.throws(()=>validateBytes(archive({badHash:true})),/Integrity mismatch/));
 test("reject unlisted file",()=>assert.throws(()=>validateBytes(archive({extra:true})),/Unlisted payload/));
 test("reject traversal",()=>assert.throws(()=>validateBytes(archive({path:"../index.html"})),/Unsafe filename/));
