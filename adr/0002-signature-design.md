@@ -1,5 +1,8 @@
 # ADR 0002 — Assinatura do inventário VLG
 
+> **Histórico / parcialmente substituído pela [ADR 0012](0012-sdp-vlg-profile.md):** o VLG canônico utiliza o inventário e domínio de assinatura SDP (`SDP-INTEGRITY-v1\\n`), não o domínio `COVIL-VLG-INTEGRITY-v1\\n` descrito abaixo. As decisões sobre separação de confiança permanecem válidas. Não existe VLG publicado a migrar.
+
+
 **Status:** Aprovado em 2026-11-18  
 **Aplicação:** COVIL Game Specification 0.1 (contrato de segurança aprovado; implementação pendente)
 
