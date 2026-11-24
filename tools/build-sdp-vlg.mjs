@@ -3,12 +3,15 @@ import {readZip,writeZip} from './zip.mjs';
 import {readFile,writeFile,mkdtemp,rm,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {tmpdir} from 'node:os';
-import {join,dirname,resolve} from 'node:path';
+import {join,dirname,resolve,relative,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateSDPVLG} from './validate-sdp-vlg.mjs';
 const digest=b=>createHash('sha256').update(b).digest('hex');
 const compare=(a,b)=>Buffer.compare(Buffer.from(a),Buffer.from(b));
 export async function buildSDPVLG(source,output,{creatorId,creatorName}={}){
+ const sourcePath=resolve(source), targetPath=resolve(output);
+ const rel=relative(sourcePath,targetPath);
+ if(rel===''||(!rel.startsWith('..'+sep)&&rel!=='..'&&!rel.startsWith(sep)))throw Error('Output must be outside source directory');
  const tmp=await mkdtemp(join(tmpdir(),'sdp-vlg-'));
  try{
   const legacy=join(tmp,'legacy.vlg');await build(source,legacy);
