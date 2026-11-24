@@ -2,7 +2,8 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {readZip} from './zip.mjs';
+import {readZip,writeZip} from './zip.mjs';
+import {validateBytes as validateLegacyGame} from './legacy-validate-vlg.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const sort=(a,b)=>Buffer.compare(Buffer.from(a),Buffer.from(b));
 const fail=m=>{throw Error(m)};
@@ -21,6 +22,11 @@ export function validateSDPVLG(bytes){
  if(i.files.length!==paths.length)fail('Inventory count mismatch');
  i.files.forEach((f,n)=>{if(f.path!==paths[n]||!Number.isSafeInteger(f.size)||f.size<0||!/^[0-9a-f]{64}$/.test(f.sha256))fail('Invalid inventory entry');
  const b=files.get(f.path);if(b.length!==f.size||sha(b)!==f.sha256)fail('Integrity mismatch: '+f.path);});
+ // Reuse strict legacy game-contract checks, but never its inventory/signature as SDP evidence.
+ const gameEntries=[...files].filter(([name])=>!['sdp.json','integrity.json','signature.json'].includes(name));
+ const legacyInventory=gameEntries.sort(([a],[b])=>sort(a,b)).map(([path,data])=>({path,size:data.length,sha256:sha(data)}));
+ const legacyZip=writeZip([...gameEntries,['integrity.json',Buffer.from(JSON.stringify({schemaVersion:'0.1',algorithm:'sha256',files:legacyInventory}))]]);
+ validateLegacyGame(legacyZip);
  return {id:s.id,version:s.version,files:paths.length,structure:'valid-experimental',signature:'absent'};
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){

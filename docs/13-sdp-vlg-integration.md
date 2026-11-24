@@ -25,19 +25,19 @@ jogo.vlg (ZIP)
 
 ## Compatibilidade e transição
 
-**VLG 0.1 legado:** permanece como está: `manifest.json`, inventário `schemaVersion` e domínio de assinatura `COVIL-VLG-INTEGRITY-v1\n`. **Não é SDP** e não deve ser renomeado para fingir compatibilidade.
+**Histórico pré-SDP (sem lançamento):** o protótipo anterior usava: `manifest.json`, inventário `schemaVersion` e domínio de assinatura `COVIL-VLG-INTEGRITY-v1\n`. **Não é SDP**; não é um formato publicado que exija migração.
 
-**VLG baseado em SDP:** inventário `sdpVersion`, domínio de assinatura `SDP-INTEGRITY-v1\n`. Não é aceito pelo validador legado. A migração exige reconstrução de inventário e **nova assinatura**. O envelope de autorização do distribuidor permanece **externo** ao ZIP assinado do desenvolvedor.
+**VLG canônico 0.1 baseado em SDP:** inventário `sdpVersion`, domínio de assinatura `SDP-INTEGRITY-v1\n`. O builder e validador principais agora usam este contrato. Não há pacote VLG lançado que precise ser migrado; assinaturas históricas não podem ser reutilizadas. O envelope de autorização do distribuidor permanece **externo** ao ZIP assinado do desenvolvedor.
 
-## Protótipo aditivo
+## Ferramentas canônicas (implementação experimental)
 
 ```bash
-node tools/build-sdp-vlg.mjs examples/hello-vlg dist/hello-sdp.vlg --creator-id example.author --creator-name "Example Author"
-node tools/validate-sdp-vlg.mjs dist/hello-sdp.vlg
+node tools/covil-build.mjs examples/hello-vlg dist/hello-vlg.vlg
+node tools/validate-vlg.mjs dist/hello-vlg.vlg
 node --test tests/conformance/sdp-vlg.test.mjs
 ```
 
-As ferramentas usam o SDK e os contratos do VLG legado, mas geram um ZIP com manifesto/inventário SDP. O validador experimental **não autentica assinaturas, não consulta CA e não substitui o verificador SDP Core independente**. Exige testes cruzados, fuzzing ZIP e conformidade de schemas antes de produção.
+As ferramentas canônicas reutilizam o SDK e os contratos de jogo do protótipo anterior, mas geram um ZIP com manifesto/inventário SDP. O validador experimental **não autentica assinaturas, não consulta CA e não substitui o verificador SDP Core independente**. Exige testes cruzados, fuzzing ZIP e conformidade de schemas antes de produção.
 
 ## Requisitos para concluir a migração
 

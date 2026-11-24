@@ -13,11 +13,11 @@ COVIL is an open, framework-independent specification for packaging and running 
 
 ## SDP and VLG — generic ZIP and game-specific ZIP
 
-**[SDP](https://github.com/phennyxz/SDP-Self-Declared-Digital-Package-Standard)** is the generic, open self-declared digital ZIP standard. **VLG** is the game-specific SDP specialization with COVIL display, input, capabilities and lifecycle contracts. The current legacy VLG 0.1 is **not** SDP-compatible; an additive experimental SDP-backed variant is available without changing legacy builders or validators. See [integration guide](docs/13-sdp-vlg-integration.md) and [ADR 0012](adr/0012-sdp-vlg-profile.md).
+**[SDP](https://github.com/phennyxz/SDP-Self-Declared-Digital-Package-Standard)** is the generic, open self-declared digital ZIP standard. **VLG** is the game-specific SDP specialization with COVIL display, input, capabilities and lifecycle contracts. **The canonical VLG builder and validator now use SDP Core 0.1**. Earlier VLG-only tools are retained under `legacy-*` for historical regression tests; no VLG release needs migration. See [integration guide](docs/13-sdp-vlg-integration.md) and [ADR 0012](adr/0012-sdp-vlg-profile.md).
 
 ```sh
-node tools/build-sdp-vlg.mjs examples/hello-vlg dist/hello-sdp.vlg --creator-id example.author --creator-name "Example Author"
-node tools/validate-sdp-vlg.mjs dist/hello-sdp.vlg
+node tools/covil-build.mjs examples/hello-vlg dist/hello-vlg.vlg
+node tools/validate-vlg.mjs dist/hello-vlg.vlg
 ```
 
 ## Repository map
@@ -52,9 +52,9 @@ node tools/validate-vlg.mjs dist/hello-vlg.vlg
 node --test tests/conformance/*.test.mjs
 ```
 
-To package another game, replace the source directory and output name: `node tools/covil-build.mjs my-game dist/my-game.vlg`. The builder discovers nested assets, generates `integrity.json`, rejects reserved metadata and validates the output. It creates **unsigned development packages only**; it does not run games, verify signatures or implement a secure host. The older `tools/build-example.mjs` remains as a fixed-file example and is not the recommended builder.
+To package another game, replace the source directory and output name: `node tools/covil-build.mjs my-game dist/my-game.vlg`. The builder discovers nested assets, generates `sdp.json` and SDP `integrity.json`, rejects reserved metadata and validates the output. It creates **unsigned development packages only**; it does not run games, verify signatures or implement a secure host. The `tools/build-example.mjs` command uses the same canonical builder.
 
-The prototype validator verifies package structure, SHA-256 integrity, and the manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures **and** distributor authorization per ADR 0009; neither is implemented yet. Do not publish untrusted games from this prototype without a secure isolated host.
+The prototype validator verifies SDP inventory and the COVIL game manifest subset. Cryptographic signatures are **not yet implemented**. [ADR 0002](adr/0002-signature-design.md) approves Ed25519 signatures over a SHA-256 inventory: unsigned packages are for explicitly enabled developer mode; Jogai catalog distribution requires verified developer signatures **and** distributor authorization per ADR 0009; neither is implemented yet. Do not publish untrusted games from this prototype without a secure isolated host.
 
 ## License
 

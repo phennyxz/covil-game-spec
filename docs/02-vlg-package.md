@@ -1,6 +1,6 @@
 # VLG package format (draft 0.1)
 
-A `.vlg` is a ZIP archive. The root contains `manifest.json`, `integrity.json`, an HTML entrypoint, and local assets. `signature.json` is reserved for signed distribution; development packages may omit it pending a finalized trust policy.
+A `.vlg` is a ZIP archive. The root contains `sdp.json` (SDP Core 0.1), `manifest.json` (COVIL game contract), `integrity.json`, an HTML entrypoint, and local assets. `signature.json` is reserved for signed distribution; development packages may omit it pending a finalized trust policy.
 
 ## Proposed baseline restrictions
 
@@ -9,14 +9,14 @@ A `.vlg` is a ZIP archive. The root contains `manifest.json`, `integrity.json`, 
 - `integrity.json` inventories every regular file except itself and `signature.json`. Each entry records `path`, byte `size` and lowercase hexadecimal SHA-256.
 - All inventory entries must exist, and no unlisted payload file is permitted.
 - The ZIP may be compressed; integrity hashes refer to **uncompressed bytes**.
-- **Approved (ADR 0002):** Ed25519 signs ASCII `COVIL-VLG-INTEGRITY-v1\\n` followed by the exact bytes of `integrity.json`; do not reserialize the JSON.
+- **Approved (ADR 0002):** Ed25519 signs ASCII `SDP-INTEGRITY-v1\\n` followed by the exact bytes of `integrity.json`; do not reserialize the JSON.
 - Hosts must impose compressed/uncompressed size, entry count and decompression ratio limits. The prototype validator has its own conservative limits.
 
 ## Prototype inventory
 
 ```json
 {
-  "schemaVersion": "0.1",
+  "sdpVersion": "0.1",
   "algorithm": "sha256",
   "files": [
     {"path":"index.html","size":123,"sha256":"<64 lowercase hex digits>"}
@@ -36,8 +36,8 @@ A distributor's second signature is **not** inserted into the original VLG ZIP. 
 
 ## Internal layout and inventory (approved clarification)
 
-The VLG format does **not** prescribe directories for game code or assets. Game authors may organize HTML, JavaScript, CSS, images, audio, and other local resources in arbitrary nested directories, provided every path is safe, normalized, unique, and present in `integrity.json` with its exact uncompressed byte length and SHA-256 hash. The inventory maps archive-relative paths to bytes for integrity verification; it does not rewrite imports or act as a module resolver.
+The VLG format specializes SDP, but does **not** prescribe directories for game code or assets. Game authors may organize HTML, JavaScript, CSS, images, audio, and other local resources in arbitrary nested directories, provided every path is safe, normalized, unique, and present in `integrity.json` with its exact uncompressed byte length and SHA-256 hash. The inventory maps archive-relative paths to bytes for integrity verification; it does not rewrite imports or act as a module resolver.
 
-Only package metadata has fixed locations at the archive root: `manifest.json`, `integrity.json`, and `signature.json` when signed. The HTML entrypoint is located by the `manifest.entry` archive-relative path and may itself be nested. The host must preserve the archive-relative path hierarchy when exposing verified files to the isolated game context. HTML references, CSS URLs, and JavaScript imports retain their normal relative-resolution semantics.
+Only package metadata has fixed locations at the archive root: `sdp.json`, `manifest.json`, `integrity.json`, and `signature.json` when signed. The HTML entrypoint is located by the `manifest.entry` archive-relative path and may itself be nested. The host must preserve the archive-relative path hierarchy when exposing verified files to the isolated game context. HTML references, CSS URLs, and JavaScript imports retain their normal relative-resolution semantics.
 
 The experimental builder currently injects the SDK at the archive root as `covil-core.mjs`. Therefore a JavaScript module in `src/game.js` must import `../covil-core.mjs` (not `./covil-core.mjs`). The SDK location is a tooling convention in 0.1, not a restriction on the locations of game-authored files. This clarification changes no ZIP structure, hashing algorithm, or manifest field.

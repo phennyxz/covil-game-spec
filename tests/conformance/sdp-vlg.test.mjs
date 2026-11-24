@@ -14,4 +14,4 @@ test('build SDP-backed VLG with complete inventory and COVIL profile',async()=>{
  files.set('unlisted.txt',Buffer.from('bad'));assert.throws(()=>validateSDPVLG(writeZip([...files])),/Inventory count mismatch/);
  }finally{await rm(tmp,{recursive:true,force:true});}
 });
-test('creator is required',async()=>await assert.rejects(buildSDPVLG('examples/hello-vlg','unused.vlg'),/Creator/));
+test('creator defaults to game manifest when not explicitly supplied',async()=>{const dir=await mkdtemp(join(tmpdir(),'covil-default-'));try{const out=join(dir,'default.vlg');await buildSDPVLG('examples/hello-vlg',out);const files=readZip(await readFile(out));const s=JSON.parse(files.get('sdp.json'));assert.equal(s.creator.id,s.id);}finally{await rm(dir,{recursive:true,force:true});}});
